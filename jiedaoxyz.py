@@ -11,9 +11,9 @@ import CoordinatesConverter as cc
 
 #判定任意位置信息属于哪个街道的方法
 
-def belong(geo_json, lat, lon):
+def belong(GEO_JSON, lat, lon):
   point = Point(lon, lat)
-  for feature in geo_json['features']:
+  for feature in GEO_JSON['features']:
     polygon = shape(feature['geometry'])
     
 
@@ -23,16 +23,24 @@ def belong(geo_json, lat, lon):
 
 ### main
 #if __name__ == '__main__':
+
+
 def jiedao(GEO_JSON,lon,lat):
-  with open(GEO_JSON,encoding='utf-8-sig') as f:
-    geo_json = geojson.load(f)
+  '''
+  :param GEO_JSON边界文件:
+  :param 经度坐标:
+  :param 纬度坐标:
+  :return 所属街道:
+  '''
+  with open(GEO_JSON, encoding='utf-8-sig') as f:
+    GEO_JSON = geojson.load(f)
 
   # 处理芝罘区
   #lon,lat = input().split('	')
   lon,lat = float(lon),float(lat)
  
   lon,lat = cc.wgs84togcj02(lon,lat)
-  city = belong(geo_json,lat,lon)
+  city = belong(GEO_JSON,lat,lon)
   print(city)
   return city
 
