@@ -7,12 +7,13 @@ from flask import request
 from flask import make_response
 from flask import redirect#重定向
 from flask import abort #异常抛出
+from flask import render_template #模板渲染
 app = Flask(__name__)
 
 SOURCE_PATH = os.path.dirname(os.path.abspath(__file__))
 GEO_JSON    = SOURCE_PATH + "/芝罘区.json"
 # 对 url 中，/user/ 后面的内容进行匹配、截取，赋值给变量 name，默认匹配字符串，可以指定类型。例如，/user/<int:id> 只匹配 id 为整数的 URL
-@app.route('/user/<name>')
+@app.route('/<name>')
 
 def hello_world(name):#变量 name 作为参数传递给函数 user[关键字参数]
     #可以根据不同的name关键字做不同的处理逻辑
@@ -28,8 +29,9 @@ def hello_world(name):#变量 name 作为参数传递给函数 user[关键字参
         response.set_cookie('answer', '42') # 设置 cookie
         return response
         # return 'Hello World!' + "\t" + name
-    elif name == "redir":
-        return redirect("http://baidu.com")#对该url进行重定向
+    elif name == "help":
+        return render_template('help.html')
+        #return redirect("http://baidu.com")#对该url进行重定向
     elif name == "notfind":
         print("not find")
         abort(404)#注意,abort 会直接跳出调用它的函数，抛出异常，把控制权交给 Web 服务器
