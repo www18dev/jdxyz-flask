@@ -32,6 +32,8 @@ def hello_world(name):#变量 name 作为参数传递给函数 user[关键字参
     elif name == "help":
         return render_template('help.html')
         #return redirect("http://baidu.com")#对该url进行重定向
+    elif name == "test":
+        return render_template('test.html')
     elif name == "notfind":
         print("not find")
         abort(404)#注意,abort 会直接跳出调用它的函数，抛出异常，把控制权交给 Web 服务器
