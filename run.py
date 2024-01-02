@@ -41,4 +41,4 @@ def hello_world(name):#变量 name 作为参数传递给函数 user[关键字参
         return "None"
 
 if __name__ == '__main__':
-    app.run()#它告诉Flask以开发模式运行你的网站以便于测试
+    app.run(port=8080)#它告诉Flask以开发模式运行你的网站以便于测试
